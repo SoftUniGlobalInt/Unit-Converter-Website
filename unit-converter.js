@@ -1,0 +1,251 @@
+// ===========================
+// CONVERSION FACTORS
+// ===========================
+
+const conversionFactors = {
+    length: {
+        // Base unit: Meter (m)
+        'mm': 0.001,
+        'cm': 0.01,
+        'm': 1,
+        'km': 1000,
+        'inch': 0.0254,
+        'foot': 0.3048,
+        'yard': 0.9144,
+        'mile': 1609.344
+    },
+    weight: {
+        // Base unit: Kilogram (kg)
+        'mg': 0.000001,
+        'g': 0.001,
+        'kg': 1,
+        'oz': 0.0283495,
+        'lb': 0.453592,
+        'ton': 1000
+    }
+};
+
+// ===========================
+// CONVERSION FUNCTIONS
+// ===========================
+
+/**
+ * Convert length value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertLength(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (meter)
+    const valueInMeters = value * conversionFactors.length[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInMeters / conversionFactors.length[toUnit];
+    
+    return parseFloat(result.toFixed(10)); // Remove floating point errors
+}
+
+/**
+ * Convert weight value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertWeight(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (kilogram)
+    const valueInKg = value * conversionFactors.weight[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInKg / conversionFactors.weight[toUnit];
+    
+    return parseFloat(result.toFixed(10)); // Remove floating point errors
+}
+
+/**
+ * Convert temperature value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit (celsius, fahrenheit, kelvin)
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertTemperature(value, fromUnit, toUnit) {
+    if (isNaN(value)) return 0;
+    
+    let celsius;
+    
+    // Convert to Celsius first
+    switch(fromUnit) {
+        case 'celsius':
+            celsius = value;
+            break;
+        case 'fahrenheit':
+            celsius = (value - 32) * (5/9);
+            break;
+        case 'kelvin':
+            celsius = value - 273.15;
+            break;
+        default:
+            celsius = value;
+    }
+    
+    // Convert from Celsius to target unit
+    let result;
+    switch(toUnit) {
+        case 'celsius':
+            result = celsius;
+            break;
+        case 'fahrenheit':
+            result = celsius * (9/5) + 32;
+            break;
+        case 'kelvin':
+            result = celsius + 273.15;
+            break;
+        default:
+            result = celsius;
+    }
+    
+    return parseFloat(result.toFixed(4));
+}
+
+// ===========================
+// FORMAT OUTPUT
+// ===========================
+
+/**
+ * Format number with appropriate decimal places
+ * @param {number} num - Number to format
+ * @returns {string} - Formatted number string
+ */
+function formatNumber(num) {
+    if (num === 0) return '0';
+    
+    // If the number is very large or very small, use exponential notation
+    if (Math.abs(num) < 0.0001 || Math.abs(num) > 1000000) {
+        return num.toExponential(6);
+    }
+    
+    // Otherwise, use standard notation with up to 6 decimal places
+    return num.toLocaleString('en-US', {
+        maximumFractionDigits: 6,
+        minimumFractionDigits: 0
+    });
+}
+
+// ===========================
+// LENGTH CONVERTER EVENT LISTENERS
+// ===========================
+
+const lengthInput = document.getElementById('length-input');
+const lengthFromUnit = document.getElementById('length-from-unit');
+const lengthToUnit = document.getElementById('length-to-unit');
+const lengthResult = document.getElementById('length-result');
+
+function updateLengthConversion() {
+    const value = parseFloat(lengthInput.value) || 0;
+    const fromUnit = lengthFromUnit.value;
+    const toUnit = lengthToUnit.value;
+    
+    const result = convertLength(value, fromUnit, toUnit);
+    lengthResult.value = formatNumber(result);
+}
+
+lengthInput.addEventListener('input', updateLengthConversion);
+lengthFromUnit.addEventListener('change', updateLengthConversion);
+lengthToUnit.addEventListener('change', updateLengthConversion);
+
+// ===========================
+// WEIGHT CONVERTER EVENT LISTENERS
+// ===========================
+
+const weightInput = document.getElementById('weight-input');
+const weightFromUnit = document.getElementById('weight-from-unit');
+const weightToUnit = document.getElementById('weight-to-unit');
+const weightResult = document.getElementById('weight-result');
+
+function updateWeightConversion() {
+    const value = parseFloat(weightInput.value) || 0;
+    const fromUnit = weightFromUnit.value;
+    const toUnit = weightToUnit.value;
+    
+    const result = convertWeight(value, fromUnit, toUnit);
+    weightResult.value = formatNumber(result);
+}
+
+weightInput.addEventListener('input', updateWeightConversion);
+weightFromUnit.addEventListener('change', updateWeightConversion);
+weightToUnit.addEventListener('change', updateWeightConversion);
+
+// ===========================
+// TEMPERATURE CONVERTER EVENT LISTENERS
+// ===========================
+
+const tempInput = document.getElementById('temp-input');
+const tempFromUnit = document.getElementById('temp-from-unit');
+const tempToUnit = document.getElementById('temp-to-unit');
+const tempResult = document.getElementById('temp-result');
+
+function updateTemperatureConversion() {
+    const value = parseFloat(tempInput.value) || 0;
+    const fromUnit = tempFromUnit.value;
+    const toUnit = tempToUnit.value;
+    
+    const result = convertTemperature(value, fromUnit, toUnit);
+    tempResult.value = formatNumber(result);
+}
+
+tempInput.addEventListener('input', updateTemperatureConversion);
+tempFromUnit.addEventListener('change', updateTemperatureConversion);
+tempToUnit.addEventListener('change', updateTemperatureConversion);
+
+// ===========================
+// NAVIGATION
+// ===========================
+
+const navLinks = document.querySelectorAll('.nav-link');
+const converterSections = document.querySelectorAll('.converter-section');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Get the category from data attribute
+        const category = link.dataset.category;
+        
+        // Remove active class from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        
+        // Add active class to clicked link
+        link.classList.add('active');
+        
+        // Hide all sections
+        converterSections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Show selected section
+        const targetSection = document.getElementById(category);
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+    });
+});
+
+// ===========================
+// INITIALIZATION
+// ===========================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all converters
+    updateLengthConversion();
+    updateWeightConversion();
+    updateTemperatureConversion();
+    
+    // Log app loaded
+    console.log('Unit Converter App Loaded Successfully!');
+});

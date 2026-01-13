@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter - Convert Length, Weight & Temperature</title>
+    <link rel="stylesheet" href="unit-converter.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Unit Converter</h1>
+            <p>Convert between different measurement units</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="#length" class="nav-link active" data-category="length">Length</a></li>
+            <li><a href="#weight" class="nav-link" data-category="weight">Weight</a></li>
+            <li><a href="#temperature" class="nav-link" data-category="temperature">Temperature</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Length Converter -->
+        <section id="length" class="converter-section active">
+            <div class="section-header">
+                <h2>Length Converter</h2>
+                <p>Convert between different length units</p>
+            </div>
+            
+            <div class="converter-grid">
+                <div class="converter-card">
+                    <label for="length-input">Enter Value:</label>
+                    <div class="input-group">
+                        <input type="number" id="length-input" placeholder="0" step="any">
+                        <select id="length-from-unit">
+                            <option value="mm">Millimeter (mm)</option>
+                            <option value="cm">Centimeter (cm)</option>
+                            <option value="m" selected>Meter (m)</option>
+                            <option value="km">Kilometer (km)</option>
+                            <option value="inch">Inch (in)</option>
+                            <option value="foot">Foot (ft)</option>
+                            <option value="yard">Yard (yd)</option>
+                            <option value="mile">Mile (mi)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="converter-card">
+                    <label for="length-to-unit">Convert To:</label>
+                    <div class="input-group">
+                        <input type="text" id="length-result" placeholder="Result" readonly>
+                        <select id="length-to-unit">
+                            <option value="mm">Millimeter (mm)</option>
+                            <option value="cm">Centimeter (cm)</option>
+                            <option value="m">Meter (m)</option>
+                            <option value="km" selected>Kilometer (km)</option>
+                            <option value="inch">Inch (in)</option>
+                            <option value="foot">Foot (ft)</option>
+                            <option value="yard">Yard (yd)</option>
+                            <option value="mile">Mile (mi)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-table">
+                <h3>Quick Reference - 1 Unit Conversions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="length-table">
+                        <tr>
+                            <td>1 Meter (m)</td>
+                            <td>Millimeter (mm)</td>
+                            <td>1000 mm</td>
+                        </tr>
+                        <tr>
+                            <td>1 Meter (m)</td>
+                            <td>Centimeter (cm)</td>
+                            <td>100 cm</td>
+                        </tr>
+                        <tr>
+                            <td>1 Kilometer (km)</td>
+                            <td>Meter (m)</td>
+                            <td>1000 m</td>
+                        </tr>
+                        <tr>
+                            <td>1 Foot (ft)</td>
+                            <td>Inch (in)</td>
+                            <td>12 in</td>
+                        </tr>
+                        <tr>
+                            <td>1 Mile (mi)</td>
+                            <td>Kilometer (km)</td>
+                            <td>1.609 km</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Weight Converter -->
+        <section id="weight" class="converter-section">
+            <div class="section-header">
+                <h2>Weight Converter</h2>
+                <p>Convert between different weight units</p>
+            </div>
+            
+            <div class="converter-grid">
+                <div class="converter-card">
+                    <label for="weight-input">Enter Value:</label>
+                    <div class="input-group">
+                        <input type="number" id="weight-input" placeholder="0" step="any">
+                        <select id="weight-from-unit">
+                            <option value="mg">Milligram (mg)</option>
+                            <option value="g">Gram (g)</option>
+                            <option value="kg" selected>Kilogram (kg)</option>
+                            <option value="oz">Ounce (oz)</option>
+                            <option value="lb">Pound (lb)</option>
+                            <option value="ton">Metric Ton (ton)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="converter-card">
+                    <label for="weight-to-unit">Convert To:</label>
+                    <div class="input-group">
+                        <input type="text" id="weight-result" placeholder="Result" readonly>
+                        <select id="weight-to-unit">
+                            <option value="mg">Milligram (mg)</option>
+                            <option value="g">Gram (g)</option>
+                            <option value="kg">Kilogram (kg)</option>
+                            <option value="oz" selected>Ounce (oz)</option>
+                            <option value="lb">Pound (lb)</option>
+                            <option value="ton">Metric Ton (ton)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-table">
+                <h3>Quick Reference - 1 Unit Conversions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 Kilogram (kg)</td>
+                            <td>Gram (g)</td>
+                            <td>1000 g</td>
+                        </tr>
+                        <tr>
+                            <td>1 Gram (g)</td>
+                            <td>Milligram (mg)</td>
+                            <td>1000 mg</td>
+                        </tr>
+                        <tr>
+                            <td>1 Kilogram (kg)</td>
+                            <td>Pound (lb)</td>
+                            <td>2.205 lb</td>
+                        </tr>
+                        <tr>
+                            <td>1 Pound (lb)</td>
+                            <td>Ounce (oz)</td>
+                            <td>16 oz</td>
+                        </tr>
+                        <tr>
+                            <td>1 Metric Ton (ton)</td>
+                            <td>Kilogram (kg)</td>
+                            <td>1000 kg</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Temperature Converter -->
+        <section id="temperature" class="converter-section">
+            <div class="section-header">
+                <h2>Temperature Converter</h2>
+                <p>Convert between different temperature scales</p>
+            </div>
+            
+            <div class="converter-grid">
+                <div class="converter-card">
+                    <label for="temp-input">Enter Value:</label>
+                    <div class="input-group">
+                        <input type="number" id="temp-input" placeholder="0" step="any">
+                        <select id="temp-from-unit">
+                            <option value="celsius" selected>Celsius (°C)</option>
+                            <option value="fahrenheit">Fahrenheit (°F)</option>
+                            <option value="kelvin">Kelvin (K)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="converter-card">
+                    <label for="temp-to-unit">Convert To:</label>
+                    <div class="input-group">
+                        <input type="text" id="temp-result" placeholder="Result" readonly>
+                        <select id="temp-to-unit">
+                            <option value="celsius">Celsius (°C)</option>
+                            <option value="fahrenheit" selected>Fahrenheit (°F)</option>
+                            <option value="kelvin">Kelvin (K)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-table">
+                <h3>Quick Reference - Conversions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0°C (Freezing)</td>
+                            <td>Fahrenheit</td>
+                            <td>32°F</td>
+                        </tr>
+                        <tr>
+                            <td>100°C (Boiling)</td>
+                            <td>Fahrenheit</td>
+                            <td>212°F</td>
+                        </tr>
+                        <tr>
+                            <td>0°C</td>
+                            <td>Kelvin</td>
+                            <td>273.15 K</td>
+                        </tr>
+                        <tr>
+                            <td>Room Temp 20°C</td>
+                            <td>Fahrenheit</td>
+                            <td>68°F</td>
+                        </tr>
+                        <tr>
+                            <td>Body Temp 37°C</td>
+                            <td>Fahrenheit</td>
+                            <td>98.6°F</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Unit Converter. All rights reserved.</p>
+            <p>Convert between metric, imperial, and other measurement units with ease.</p>
+        </div>
+    </footer>
+
+    <script src="unit-converter.js"></script>
+</body>
+</html>
