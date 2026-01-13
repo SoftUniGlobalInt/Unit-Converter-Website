@@ -41,6 +41,15 @@ const conversionFactors = {
         'kmh': 3.6,
         'mph': 2.23694,
         'knots': 1.94384
+    },
+    area: {
+        // Base unit: Square meter (m²)
+        'mm2': 0.000001,
+        'cm2': 0.0001,
+        'm2': 1,
+        'km2': 1000000,
+        'acre': 4046.86,
+        'hectare': 10000
     }
 };
 
@@ -120,6 +129,25 @@ function convertSpeed(value, fromUnit, toUnit) {
     
     // Convert from base unit to target unit
     const result = valueInMs * conversionFactors.speed[toUnit];
+    
+    return parseFloat(result.toFixed(10)); // Remove floating point errors
+}
+
+/**
+ * Convert area value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertArea(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (m²)
+    const valueInM2 = value * conversionFactors.area[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInM2 / conversionFactors.area[toUnit];
     
     return parseFloat(result.toFixed(10)); // Remove floating point errors
 }
@@ -283,6 +311,28 @@ speedFromUnit.addEventListener('change', updateSpeedConversion);
 speedToUnit.addEventListener('change', updateSpeedConversion);
 
 // ===========================
+// AREA CONVERTER EVENT LISTENERS
+// ===========================
+
+const areaInput = document.getElementById('area-input');
+const areaFromUnit = document.getElementById('area-from-unit');
+const areaToUnit = document.getElementById('area-to-unit');
+const areaResult = document.getElementById('area-result');
+
+function updateAreaConversion() {
+    const value = parseFloat(areaInput.value) || 0;
+    const fromUnit = areaFromUnit.value;
+    const toUnit = areaToUnit.value;
+    
+    const result = convertArea(value, fromUnit, toUnit);
+    areaResult.value = formatNumber(result);
+}
+
+areaInput.addEventListener('input', updateAreaConversion);
+areaFromUnit.addEventListener('change', updateAreaConversion);
+areaToUnit.addEventListener('change', updateAreaConversion);
+
+// ===========================
 // TEMPERATURE CONVERTER EVENT LISTENERS
 // ===========================
 
@@ -347,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWeightConversion();
     updateVolumeConversion();
     updateSpeedConversion();
+    updateAreaConversion();
     updateTemperatureConversion();
     
     // Log app loaded
