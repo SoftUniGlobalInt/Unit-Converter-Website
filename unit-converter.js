@@ -35,6 +35,7 @@ const conversionFactors = {
         'tbsp': 0.0147868,
         'tsp': 0.00492892
     },
+<<<<<<< HEAD
     area: {
         // Base unit: Square meter (m²)
         'mm2': 0.000001,
@@ -50,6 +51,14 @@ const conversionFactors = {
         'bar': 100000,
         'atm': 101325,
         'psi': 6894.76
+=======
+    speed: {
+        // Base unit: Meter per second (m/s)
+        'ms': 1,
+        'kmh': 3.6,
+        'mph': 2.23694,
+        'knots': 1.94384
+>>>>>>> 8db76d3 (Implemented a speed converter)
     }
 };
 
@@ -115,12 +124,17 @@ function convertVolume(value, fromUnit, toUnit) {
 }
 
 /**
+<<<<<<< HEAD
  * Convert area value
+=======
+ * Convert speed value
+>>>>>>> 8db76d3 (Implemented a speed converter)
  * @param {number} value - Input value
  * @param {string} fromUnit - Source unit
  * @param {string} toUnit - Target unit
  * @returns {number} - Converted value
  */
+<<<<<<< HEAD
 function convertArea(value, fromUnit, toUnit) {
     if (!value || isNaN(value)) return 0;
     
@@ -148,6 +162,16 @@ function convertPressure(value, fromUnit, toUnit) {
     
     // Convert from base unit to target unit
     const result = valueInPa / conversionFactors.pressure[toUnit];
+=======
+function convertSpeed(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (m/s)
+    const valueInMs = value / conversionFactors.speed[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInMs * conversionFactors.speed[toUnit];
+>>>>>>> 8db76d3 (Implemented a speed converter)
     
     return parseFloat(result.toFixed(10)); // Remove floating point errors
 }
@@ -289,6 +313,7 @@ volumeFromUnit.addEventListener('change', updateVolumeConversion);
 volumeToUnit.addEventListener('change', updateVolumeConversion);
 
 // ===========================
+<<<<<<< HEAD
 // AREA CONVERTER EVENT LISTENERS
 // ===========================
 
@@ -332,6 +357,30 @@ pressureInput.addEventListener('input', updatePressureConversion);
 pressureFromUnit.addEventListener('change', updatePressureConversion);
 pressureToUnit.addEventListener('change', updatePressureConversion);
 // ===========================
+=======
+// SPEED CONVERTER EVENT LISTENERS
+// ===========================
+
+const speedInput = document.getElementById('speed-input');
+const speedFromUnit = document.getElementById('speed-from-unit');
+const speedToUnit = document.getElementById('speed-to-unit');
+const speedResult = document.getElementById('speed-result');
+
+function updateSpeedConversion() {
+    const value = parseFloat(speedInput.value) || 0;
+    const fromUnit = speedFromUnit.value;
+    const toUnit = speedToUnit.value;
+    
+    const result = convertSpeed(value, fromUnit, toUnit);
+    speedResult.value = formatNumber(result);
+}
+
+speedInput.addEventListener('input', updateSpeedConversion);
+speedFromUnit.addEventListener('change', updateSpeedConversion);
+speedToUnit.addEventListener('change', updateSpeedConversion);
+
+// ===========================
+>>>>>>> 8db76d3 (Implemented a speed converter)
 // TEMPERATURE CONVERTER EVENT LISTENERS
 // ===========================
 
@@ -395,8 +444,12 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLengthConversion();
     updateWeightConversion();
     updateVolumeConversion();
+<<<<<<< HEAD
     updateAreaConversion();
     updatePressureConversion();
+=======
+    updateSpeedConversion();
+>>>>>>> 8db76d3 (Implemented a speed converter)
     updateTemperatureConversion();
     
     // Log app loaded
