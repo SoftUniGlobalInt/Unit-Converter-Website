@@ -21,7 +21,8 @@
             <li><a href="#length" class="nav-link active" data-category="length">Length</a></li>
             <li><a href="#weight" class="nav-link" data-category="weight">Weight</a></li>
             <li><a href="#volume" class="nav-link" data-category="volume">Volume</a></li>
-            <li><a href="#speed" class="nav-link" data-category="speed">Speed</a></li>
+            <li><a href="#area" class="nav-link" data-category="area">Area</a></li>
+            <li><a href="#pressure" class="nav-link" data-category="pressure">Pressure</a></li>
             <li><a href="#temperature" class="nav-link" data-category="temperature">Temperature</a></li>
         </ul>
     </nav>
@@ -278,36 +279,40 @@
             </div>
         </section>
 
-        <!-- Speed Converter -->
-        <section id="speed" class="converter-section">
+        <!-- Area Converter -->
+        <section id="area" class="converter-section">
             <div class="section-header">
-                <h2>Speed Converter</h2>
-                <p>Convert between different speed units</p>
+                <h2>Area Converter</h2>
+                <p>Convert between different area units</p>
             </div>
             
             <div class="converter-grid">
                 <div class="converter-card">
-                    <label for="speed-input">Enter Value:</label>
+                    <label for="area-input">Enter Value:</label>
                     <div class="input-group">
-                        <input type="number" id="speed-input" placeholder="0" step="any">
-                        <select id="speed-from-unit">
-                            <option value="ms">Meter per Second (m/s)</option>
-                            <option value="kmh" selected>Kilometer per Hour (km/h)</option>
-                            <option value="mph">Mile per Hour (mph)</option>
-                            <option value="knots">Knots (kn)</option>
+                        <input type="number" id="area-input" placeholder="0" step="any">
+                        <select id="area-from-unit">
+                            <option value="mm2">Square Millimeter (mm²)</option>
+                            <option value="cm2">Square Centimeter (cm²)</option>
+                            <option value="m2" selected>Square Meter (m²)</option>
+                            <option value="km2">Square Kilometer (km²)</option>
+                            <option value="acre">Acre (ac)</option>
+                            <option value="hectare">Hectare (ha)</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="converter-card">
-                    <label for="speed-to-unit">Convert To:</label>
+                    <label for="area-to-unit">Convert To:</label>
                     <div class="input-group">
-                        <input type="text" id="speed-result" placeholder="Result" readonly>
-                        <select id="speed-to-unit">
-                            <option value="ms">Meter per Second (m/s)</option>
-                            <option value="kmh">Kilometer per Hour (km/h)</option>
-                            <option value="mph" selected>Mile per Hour (mph)</option>
-                            <option value="knots">Knots (kn)</option>
+                        <input type="text" id="area-result" placeholder="Result" readonly>
+                        <select id="area-to-unit">
+                            <option value="mm2">Square Millimeter (mm²)</option>
+                            <option value="cm2">Square Centimeter (cm²)</option>
+                            <option value="m2">Square Meter (m²)</option>
+                            <option value="km2" selected>Square Kilometer (km²)</option>
+                            <option value="acre">Acre (ac)</option>
+                            <option value="hectare">Hectare (ha)</option>
                         </select>
                     </div>
                 </div>
@@ -325,29 +330,105 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1 m/s</td>
-                            <td>km/h</td>
-                            <td>3.6 km/h</td>
+                            <td>1 m²</td>
+                            <td>cm²</td>
+                            <td>10,000 cm²</td>
                         </tr>
                         <tr>
-                            <td>1 km/h</td>
-                            <td>m/s</td>
-                            <td>0.278 m/s</td>
+                            <td>1 km²</td>
+                            <td>m²</td>
+                            <td>1,000,000 m²</td>
                         </tr>
                         <tr>
-                            <td>1 mph</td>
-                            <td>km/h</td>
-                            <td>1.609 km/h</td>
+                            <td>1 hectare (ha)</td>
+                            <td>m²</td>
+                            <td>10,000 m²</td>
                         </tr>
                         <tr>
-                            <td>1 knot</td>
-                            <td>km/h</td>
-                            <td>1.852 km/h</td>
+                            <td>1 acre (ac)</td>
+                            <td>m²</td>
+                            <td>4,047 m²</td>
                         </tr>
                         <tr>
-                            <td>1 m/s</td>
-                            <td>mph</td>
-                            <td>2.237 mph</td>
+                            <td>1 hectare (ha)</td>
+                            <td>km²</td>
+                            <td>0.01 km²</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Pressure Converter -->
+        <section id="pressure" class="converter-section">
+            <div class="section-header">
+                <h2>Pressure Converter</h2>
+                <p>Convert between different pressure units</p>
+            </div>
+            
+            <div class="converter-grid">
+                <div class="converter-card">
+                    <label for="pressure-input">Enter Value:</label>
+                    <div class="input-group">
+                        <input type="number" id="pressure-input" placeholder="0" step="any">
+                        <select id="pressure-from-unit">
+                            <option value="pa">Pascal (Pa)</option>
+                            <option value="bar" selected>Bar (bar)</option>
+                            <option value="atm">Atmosphere (atm)</option>
+                            <option value="psi">Pound per Square Inch (psi)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="converter-card">
+                    <label for="pressure-to-unit">Convert To:</label>
+                    <div class="input-group">
+                        <input type="text" id="pressure-result" placeholder="Result" readonly>
+                        <select id="pressure-to-unit">
+                            <option value="pa">Pascal (Pa)</option>
+                            <option value="bar">Bar (bar)</option>
+                            <option value="atm" selected>Atmosphere (atm)</option>
+                            <option value="psi">Pound per Square Inch (psi)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-table">
+                <h3>Quick Reference - 1 Unit Conversions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 Pa</td>
+                            <td>bar</td>
+                            <td>0.00001 bar</td>
+                        </tr>
+                        <tr>
+                            <td>1 bar</td>
+                            <td>Pa</td>
+                            <td>100,000 Pa</td>
+                        </tr>
+                        <tr>
+                            <td>1 atm</td>
+                            <td>Pa</td>
+                            <td>101,325 Pa</td>
+                        </tr>
+                        <tr>
+                            <td>1 psi</td>
+                            <td>Pa</td>
+                            <td>6,894.76 Pa</td>
+                        </tr>
+                        <tr>
+                            <td>1 bar</td>
+                            <td>psi</td>
+                            <td>14.5038 psi</td>
                         </tr>
                     </tbody>
                 </table>
