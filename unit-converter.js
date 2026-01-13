@@ -22,6 +22,18 @@ const conversionFactors = {
         'oz': 0.0283495,
         'lb': 0.453592,
         'ton': 1000
+    },
+    volume: {
+        // Base unit: Liter (L)
+        'ml': 0.001,
+        'liter': 1,
+        'gallon': 3.78541,
+        'quart': 0.946353,
+        'pint': 0.473176,
+        'cup': 0.236588,
+        'fl_oz': 0.0295735,
+        'tbsp': 0.0147868,
+        'tsp': 0.00492892
     }
 };
 
@@ -63,6 +75,25 @@ function convertWeight(value, fromUnit, toUnit) {
     
     // Convert from base unit to target unit
     const result = valueInKg / conversionFactors.weight[toUnit];
+    
+    return parseFloat(result.toFixed(10)); // Remove floating point errors
+}
+
+/**
+ * Convert volume value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertVolume(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (liter)
+    const valueInLiters = value * conversionFactors.volume[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInLiters / conversionFactors.volume[toUnit];
     
     return parseFloat(result.toFixed(10)); // Remove floating point errors
 }
@@ -182,6 +213,28 @@ weightFromUnit.addEventListener('change', updateWeightConversion);
 weightToUnit.addEventListener('change', updateWeightConversion);
 
 // ===========================
+// VOLUME CONVERTER EVENT LISTENERS
+// ===========================
+
+const volumeInput = document.getElementById('volume-input');
+const volumeFromUnit = document.getElementById('volume-from-unit');
+const volumeToUnit = document.getElementById('volume-to-unit');
+const volumeResult = document.getElementById('volume-result');
+
+function updateVolumeConversion() {
+    const value = parseFloat(volumeInput.value) || 0;
+    const fromUnit = volumeFromUnit.value;
+    const toUnit = volumeToUnit.value;
+    
+    const result = convertVolume(value, fromUnit, toUnit);
+    volumeResult.value = formatNumber(result);
+}
+
+volumeInput.addEventListener('input', updateVolumeConversion);
+volumeFromUnit.addEventListener('change', updateVolumeConversion);
+volumeToUnit.addEventListener('change', updateVolumeConversion);
+
+// ===========================
 // TEMPERATURE CONVERTER EVENT LISTENERS
 // ===========================
 
@@ -244,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all converters
     updateLengthConversion();
     updateWeightConversion();
+    updateVolumeConversion();
     updateTemperatureConversion();
     
     // Log app loaded

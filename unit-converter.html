@@ -191,6 +191,92 @@
             </div>
         </section>
 
+        <!-- Volume Converter -->
+        <section id="volume" class="converter-section">
+            <div class="section-header">
+                <h2>Volume Converter</h2>
+                <p>Convert between different volume units</p>
+            </div>
+            
+            <div class="converter-grid">
+                <div class="converter-card">
+                    <label for="volume-input">Enter Value:</label>
+                    <div class="input-group">
+                        <input type="number" id="volume-input" placeholder="0" step="any">
+                        <select id="volume-from-unit">
+                            <option value="ml">Milliliter (ml)</option>
+                            <option value="liter" selected>Liter (L)</option>
+                            <option value="gallon">Gallon (gal)</option>
+                            <option value="quart">Quart (qt)</option>
+                            <option value="pint">Pint (pt)</option>
+                            <option value="cup">Cup (cup)</option>
+                            <option value="fl_oz">Fluid Ounce (fl oz)</option>
+                            <option value="tbsp">Tablespoon (tbsp)</option>
+                            <option value="tsp">Teaspoon (tsp)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="converter-card">
+                    <label for="volume-to-unit">Convert To:</label>
+                    <div class="input-group">
+                        <input type="text" id="volume-result" placeholder="Result" readonly>
+                        <select id="volume-to-unit">
+                            <option value="ml">Milliliter (ml)</option>
+                            <option value="liter">Liter (L)</option>
+                            <option value="gallon" selected>Gallon (gal)</option>
+                            <option value="quart">Quart (qt)</option>
+                            <option value="pint">Pint (pt)</option>
+                            <option value="cup">Cup (cup)</option>
+                            <option value="fl_oz">Fluid Ounce (fl oz)</option>
+                            <option value="tbsp">Tablespoon (tbsp)</option>
+                            <option value="tsp">Teaspoon (tsp)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-table">
+                <h3>Quick Reference - 1 Unit Conversions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 Liter (L)</td>
+                            <td>Milliliter (ml)</td>
+                            <td>1000 ml</td>
+                        </tr>
+                        <tr>
+                            <td>1 Liter (L)</td>
+                            <td>Gallon (gal)</td>
+                            <td>0.264 gal</td>
+                        </tr>
+                        <tr>
+                            <td>1 Gallon (gal)</td>
+                            <td>Liter (L)</td>
+                            <td>3.785 L</td>
+                        </tr>
+                        <tr>
+                            <td>1 Cup (cup)</td>
+                            <td>Milliliter (ml)</td>
+                            <td>236.588 ml</td>
+                        </tr>
+                        <tr>
+                            <td>1 Fluid Ounce (fl oz)</td>
+                            <td>Milliliter (ml)</td>
+                            <td>29.574 ml</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <!-- Temperature Converter -->
         <section id="temperature" class="converter-section">
             <div class="section-header">
