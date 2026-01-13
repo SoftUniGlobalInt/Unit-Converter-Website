@@ -50,6 +50,13 @@ const conversionFactors = {
         'km2': 1000000,
         'acre': 4046.86,
         'hectare': 10000
+    },
+    pressure: {
+        // Base unit: Pascal (Pa)
+        'pa': 1,
+        'bar': 100000,
+        'atm': 101325,
+        'psi': 6894.76
     }
 };
 
@@ -148,6 +155,25 @@ function convertArea(value, fromUnit, toUnit) {
     
     // Convert from base unit to target unit
     const result = valueInM2 / conversionFactors.area[toUnit];
+    
+    return parseFloat(result.toFixed(10)); // Remove floating point errors
+}
+
+/**
+ * Convert pressure value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertPressure(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (Pa)
+    const valueInPa = value * conversionFactors.pressure[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInPa / conversionFactors.pressure[toUnit];
     
     return parseFloat(result.toFixed(10)); // Remove floating point errors
 }
@@ -333,6 +359,27 @@ areaFromUnit.addEventListener('change', updateAreaConversion);
 areaToUnit.addEventListener('change', updateAreaConversion);
 
 // ===========================
+// PRESSURE CONVERTER EVENT LISTENERS
+// ===========================
+
+const pressureInput = document.getElementById('pressure-input');
+const pressureFromUnit = document.getElementById('pressure-from-unit');
+const pressureToUnit = document.getElementById('pressure-to-unit');
+const pressureResult = document.getElementById('pressure-result');
+
+function updatePressureConversion() {
+    const value = parseFloat(pressureInput.value) || 0;
+    const fromUnit = pressureFromUnit.value;
+    const toUnit = pressureToUnit.value;
+    
+    const result = convertPressure(value, fromUnit, toUnit);
+    pressureResult.value = formatNumber(result);
+}
+
+pressureInput.addEventListener('input', updatePressureConversion);
+pressureFromUnit.addEventListener('change', updatePressureConversion);
+pressureToUnit.addEventListener('change', updatePressureConversion);
+// ===========================
 // TEMPERATURE CONVERTER EVENT LISTENERS
 // ===========================
 
@@ -398,6 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateVolumeConversion();
     updateSpeedConversion();
     updateAreaConversion();
+    updatePressureConversion();
     updateTemperatureConversion();
     
     // Log app loaded
