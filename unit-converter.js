@@ -34,6 +34,13 @@ const conversionFactors = {
         'fl_oz': 0.0295735,
         'tbsp': 0.0147868,
         'tsp': 0.00492892
+    },
+    speed: {
+        // Base unit: Meter per second (m/s)
+        'ms': 1,
+        'kmh': 3.6,
+        'mph': 2.23694,
+        'knots': 1.94384
     }
 };
 
@@ -94,6 +101,25 @@ function convertVolume(value, fromUnit, toUnit) {
     
     // Convert from base unit to target unit
     const result = valueInLiters / conversionFactors.volume[toUnit];
+    
+    return parseFloat(result.toFixed(10)); // Remove floating point errors
+}
+
+/**
+ * Convert speed value
+ * @param {number} value - Input value
+ * @param {string} fromUnit - Source unit
+ * @param {string} toUnit - Target unit
+ * @returns {number} - Converted value
+ */
+function convertSpeed(value, fromUnit, toUnit) {
+    if (!value || isNaN(value)) return 0;
+    
+    // Convert to base unit (m/s)
+    const valueInMs = value / conversionFactors.speed[fromUnit];
+    
+    // Convert from base unit to target unit
+    const result = valueInMs * conversionFactors.speed[toUnit];
     
     return parseFloat(result.toFixed(10)); // Remove floating point errors
 }
@@ -235,6 +261,28 @@ volumeFromUnit.addEventListener('change', updateVolumeConversion);
 volumeToUnit.addEventListener('change', updateVolumeConversion);
 
 // ===========================
+// SPEED CONVERTER EVENT LISTENERS
+// ===========================
+
+const speedInput = document.getElementById('speed-input');
+const speedFromUnit = document.getElementById('speed-from-unit');
+const speedToUnit = document.getElementById('speed-to-unit');
+const speedResult = document.getElementById('speed-result');
+
+function updateSpeedConversion() {
+    const value = parseFloat(speedInput.value) || 0;
+    const fromUnit = speedFromUnit.value;
+    const toUnit = speedToUnit.value;
+    
+    const result = convertSpeed(value, fromUnit, toUnit);
+    speedResult.value = formatNumber(result);
+}
+
+speedInput.addEventListener('input', updateSpeedConversion);
+speedFromUnit.addEventListener('change', updateSpeedConversion);
+speedToUnit.addEventListener('change', updateSpeedConversion);
+
+// ===========================
 // TEMPERATURE CONVERTER EVENT LISTENERS
 // ===========================
 
@@ -298,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLengthConversion();
     updateWeightConversion();
     updateVolumeConversion();
+    updateSpeedConversion();
     updateTemperatureConversion();
     
     // Log app loaded
